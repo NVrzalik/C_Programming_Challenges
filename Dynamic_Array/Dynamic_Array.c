@@ -100,7 +100,7 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int** queries, i
         //int size = sizeof(arr[idx]) / sizeof(int);
         arr.outerArray[idx].size += 1;
         arr.outerArray[idx].innerArray = (int*)realloc(arr.outerArray[idx].innerArray, arr.outerArray[idx].size * sizeof(int));
-        arr.outerArray[idx].innerArray[arr.outerArray[idx].size] = y;
+        arr.outerArray[idx].innerArray[arr.outerArray[idx].size - 1] = y;
       }
       else
       {
