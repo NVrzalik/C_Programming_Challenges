@@ -59,8 +59,8 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int** queries, i
       int size;
     };
     struct FirstDimension {
-      struct SecondDimension outerArray[n];
-      int size = n;
+      struct SecondDimension* outerArray;
+      int size;
     };
     *result_count = 0;
     int lastAnswer = 0;
@@ -72,7 +72,7 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int** queries, i
       }
     }
 
-    struct FirstDimension arr;
+    struct FirstDimension arr = {.size = n, .outerArray = (struct SecondDimension*)malloc(n * sizeof(struct SecondDimension))};
 
     //int** arr = (int**)calloc(n, sizeof(int*));
     int* answers = (int*)malloc(*result_count * sizeof(int));
@@ -106,8 +106,9 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int** queries, i
       {
         //perform query type 2
         //Rewrite to use structs
-        int temp = y % (sizeof(arr[idx]) / sizeof(arr[idx][0]));
-        lastAnswer = arr[idx][temp];
+        //int temp = y % (sizeof(arr[idx]) / sizeof(arr[idx][0]));
+        int temp = y % (arr.outerArray[idx].size);
+        lastAnswer = arr.outerArray[idx][temp];
         answers[answerIndex++] = lastAnswer;
       }
     }
